@@ -7,9 +7,11 @@ def depression(value):
         return 2
     return 3
 
+
 def normalize(value, total):
     res = value / total
     return res * 3.0
+
 
 def depression_calculator(emotions):
     if emotions['neutral'] > 0.4:
@@ -18,8 +20,8 @@ def depression_calculator(emotions):
     total = sum([v for k, v in emotions.items()])
 
     s = 3 * normalize(emotions["sadness"], total)
-    f = 4 * normalize(emotions["fear"], total)
-    fu = normalize(emotions["fear"] + emotions["surprise"], total)
+    f = 4 * normalize(emotions["fear"] + emotions['neutral'], total)
+    f_su = normalize(emotions["fear"] + emotions["surprise"], total)
     c = 2 * normalize(emotions["contempt"], total)
     ac = 3 * normalize(emotions["anger"] + emotions["contempt"], total)
     afc = 2 * normalize(
@@ -29,19 +31,19 @@ def depression_calculator(emotions):
     sfc = normalize(
         emotions["sadness"] + emotions["fear"] + emotions["contempt"], total)
 
-    coeffs = [s, f, fu, c, ac, afc, fs, sc, sfc]
+    coeffs = [s, f, f_su, c, ac, afc, fs, sc, sfc]
     return depression(sum(coeffs))
 
+
 # emotions = {
-#     "anger": 0.0,
-#     "contempt": 0.0,
-#     "disgust": 0.0,
-#     "fear": 0.0,
-#     "happiness": 0.0,
-#     "neutral": 0.0,
-#     "sadness": 1.,
-#     "surprise": 0.0,
+#     "anger": 0,
+#     "contempt": 0,
+#     "disgust": 0,
+#     "fear": 0,
+#     "happiness": 0,
+#     "neutral": 0.334,
+#     "sadness": 0.665,
+#     "surprise": 0
 # }
 #
 # print(depression_calculator(emotions))
-
