@@ -3,6 +3,8 @@ import requests
 import os
 from overview import overview
 
+BACKEND_URL = "https://depression-detector-backend.herokuapp.com/api/"
+
 
 # Designing window for registration
 
@@ -90,36 +92,31 @@ def register_user():
     print(username_info)
     print(password_info)
     dict = {
-        username: username_info,
-        password: password_info
+        "username": username_info,
+        "password": password_info
     }
-    err = requests.post('lalla', json=dict)
-    print(err)
-    Label(register_screen, text="Registration Success", fg="green",
-          font=("calibri", 11)).pack()
+    err = requests.post(BACKEND_URL+'registration', json=dict)
+    if err.status_code == 200:
+        Label(register_screen, text="Registration Success", fg="green",
+              font=("calibri", 11)).pack()
+    else:
+        Label(register_screen, text="Registration Failed", fg="red",
+              font=("calibri", 11)).pack()
+
 
 
 # Implementing event on login button
 
 def login_verify():
-    username1 = username_verify.get()
-    password1 = password_verify.get()
-    username_login_entry.delete(0, END)
-    password_login_entry.delete(0, END)
-
-    list_of_files = os.listdir()
-    if username1 in list_of_files:
-        file1 = open(username1, "r")
-        verify = file1.read().splitlines()
-        if password1 in verify:
-            login_sucess()
-
-        else:
-            password_not_recognised()
-
+    dict = {
+        "username": username_verify.get(),
+        "password": password_verify.get()
+    }
+    err = requests.get(BACKEND_URL + 'measurement', headers=dict)
+    if err.status_code == 200:
+        login_sucess()
     else:
-        user_not_found()
-
+        password_not_recognised()
 
 # Designing popup for login success
 def register_sucess():
