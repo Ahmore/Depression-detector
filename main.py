@@ -41,6 +41,7 @@ def call_register_main_screen():
     register_screen.withdraw()
     main_screen.wm_deiconify()
 
+
 # Designing window for login
 
 def login():
@@ -75,27 +76,27 @@ def login():
     Button(login_screen, text="Back", width=10, height=1,
            command=call_login_main_screen).pack()
 
+
 def call_login_main_screen():
     login_screen.withdraw()
     main_screen.wm_deiconify()
+
 
 # Implementing event on register button
 
 def register_user():
     username_info = username.get()
     password_info = password.get()
-
-    file = open(username_info, "w")
-    file.write(username_info + "\n")
-    file.write(password_info)
-    file.close()
-
-    username_entry.delete(0, END)
-    password_entry.delete(0, END)
-
+    print(username_info)
+    print(password_info)
+    dict = {
+        username: username_info,
+        password: password_info
+    }
+    err = requests.post('lalla', json=dict)
+    print(err)
     Label(register_screen, text="Registration Success", fg="green",
           font=("calibri", 11)).pack()
-
 
 
 # Implementing event on login button
@@ -131,6 +132,7 @@ def register_sucess():
     Button(register_success_screen, text="OK",
            command=call_register_overview).pack()
 
+
 def login_sucess():
     login_screen.withdraw()
     global login_success_screen
@@ -141,13 +143,16 @@ def login_sucess():
     Button(login_success_screen, text="OK",
            command=call_login_overview).pack()
 
+
 def call_login_overview():
     login_success_screen.withdraw()
     overview()
 
+
 def call_register_overview():
     register_success_screen.withdraw()
     overview()
+
 
 # Designing popup for login invalid password
 
