@@ -7,6 +7,7 @@ def charts():
     charts_screen = Tk()
     charts_screen.title("CHARTS")
     charts_screen.geometry("745x370")
+
     Label(charts_screen, text="Date from:", height=2, font='Arial 14').grid(
         row=0, column=0)
     cal1 = Calendar(charts_screen, font="Arial 14", selectmode='day',
@@ -34,5 +35,3 @@ def emotions_plot():
 
 def happiness_plot():
     pass
-
-# charts()

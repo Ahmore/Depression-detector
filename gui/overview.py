@@ -1,7 +1,7 @@
 from tkinter import *
-from charts import charts
+from gui.charts import charts
 
-def overview():
+def open_overview_screen():
     global overview_screen
     overview_screen = Tk()
     overview_screen.title("Overview")
