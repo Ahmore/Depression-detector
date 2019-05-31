@@ -45,6 +45,8 @@ def open_register_result_screen(is_success):
     Label(register_result_screen, text="Register success" if is_success is True else "Register fail").pack()
 
     if is_success is True:
+        register_screen.withdraw()
+
         Button(register_result_screen, text="OK",
                command=go_to_login_screen).pack()
     else:
@@ -55,6 +57,5 @@ def close_register_result_screen():
     register_result_screen.withdraw()
 
 def go_to_login_screen():
-    register_screen.withdraw()
     register_result_screen.withdraw()
     open_login_screen()
