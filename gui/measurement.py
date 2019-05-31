@@ -7,25 +7,25 @@ from services.camera import make_photo
 import datetime
 
 def open_measurement_screen():
+    gui.overview.overview_screen.withdraw()
+
     global measurement_screen
     measurement_screen = Toplevel(gui.start.start_screen)
     measurement_screen.title("Add measurement")
-    measurement_screen.geometry("300x250")
+    measurement_screen.geometry("200x200")
 
-    Label(measurement_screen, text="Please enter your feeling [1-4]").pack()
-
-    # gui.start.start_screen.withdraw()
-    gui.overview.overview_screen.withdraw()
+    Label(measurement_screen, text="").pack()
 
     feeling = StringVar()
 
-    Label(measurement_screen, text="Feeling * ").pack()
+    Label(measurement_screen, text="How do You feel? [1-4]*").pack()
     feelings_entry = Entry(measurement_screen, textvariable=feeling)
     feelings_entry.pack()
 
     Label(measurement_screen, text="").pack()
     Button(measurement_screen, text="Add", width=10, height=1,
            command=lambda: try_add_measurement(feeling.get())).pack()
+    Label(measurement_screen, text="").pack()
     Button(measurement_screen, text="Back", width=10, height=1,
            command=go_to_overview_screen).pack()
 
@@ -45,12 +45,13 @@ def open_photo_screen(feeling):
     global photo_screen
     photo_screen = Toplevel(gui.start.start_screen)
     photo_screen.title("Photo")
-    photo_screen.geometry("300x250")
+    photo_screen.geometry("275x150")
 
-    Label(photo_screen, text="Make photo").pack()
-    Button(photo_screen, text="Make", width=10, height=1,
+    Label(photo_screen, text="").pack()
+    Button(photo_screen, text="Make photo", width=30, height=2,
            command=lambda: try_make_photo(feeling, initial_photo_data)).pack()
-    Button(photo_screen, text="Back", width=10, height=1,
+    Label(photo_screen, text="").pack()
+    Button(photo_screen, text="Back", width=30, height=2,
            command=go_to_overview_screen2).pack()
 
 def try_make_photo(feeling, initial_photo_data):
@@ -84,9 +85,8 @@ def go_to_overview_screen3():
 def open_measurement_result_screen(is_success):
     global measurement_result_screen
     measurement_result_screen = Toplevel(gui.start.start_screen)
-    measurement_result_screen.title("Success" if is_success is True else "Fail")
-    measurement_result_screen.geometry("150x100")
-    Label(measurement_result_screen, text="Measurement success" if is_success is True else "Measurement fail").pack()
+    measurement_result_screen.title("Success" if is_success is True else "Error")
+    Label(measurement_result_screen, text="Measurement succeeded" if is_success is True else "Measurement failed").pack()
 
-    Button(measurement_result_screen, text="OK",
+    Button(measurement_result_screen, text="OK", width=10, height=1,
            command=go_to_overview_screen3).pack()
