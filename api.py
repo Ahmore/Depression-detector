@@ -51,10 +51,13 @@ def get_azure_token(token):
     return response.content.decode('utf8')
 
 
-def get_azure_data(azure_token, image_url):
+def get_azure_data(azure_token, image):
     face_api_url = AZURE_URL + 'detect'
 
-    headers = {'Ocp-Apim-Subscription-Key': azure_token}
+    headers = {
+        'Ocp-Apim-Subscription-Key': azure_token,
+        'Content-Type': 'application/octet-stream'
+    }
 
     params = {
         'returnFaceId': 'false',
@@ -62,7 +65,7 @@ def get_azure_data(azure_token, image_url):
         'returnFaceAttributes': 'emotion',
     }
 
-    response = requests.post(face_api_url, params=params, headers=headers, json={"url": image_url})
+    response = requests.post(face_api_url, params=params, headers=headers, data=image)
     return json.dumps(response.json())
 
 
