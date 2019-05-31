@@ -35,7 +35,9 @@ def go_to_start_screen():
     gui.start.start_screen.wm_deiconify()
 
 def try_login(username, password):
+    global token
     token = login(username, password)
+
     if token is not None:
         go_to_overview_screen()
     else:

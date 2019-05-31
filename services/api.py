@@ -66,7 +66,7 @@ def get_azure_data(azure_token, image):
     }
 
     response = requests.post(face_api_url, params=params, headers=headers, data=image)
-    return json.dumps(response.json())
+    return response.json()[0].get('faceAttributes').get('emotion')
 
 
 def send_measurement(token, date, value):
