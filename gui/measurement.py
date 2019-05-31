@@ -11,7 +11,7 @@ def open_measurement_screen():
 
     global measurement_screen
     measurement_screen = Toplevel(gui.start.start_screen)
-    measurement_screen.title("Add measurement")
+    measurement_screen.title("Measurement")
     measurement_screen.geometry("200x200")
 
     Label(measurement_screen, text="").pack()
