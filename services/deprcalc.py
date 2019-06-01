@@ -1,15 +1,18 @@
 def depression(value):
-    if value <= 10:
-        return 0
-    if value <= 16:
-        return 1
-    if value <= 22:
+    print(value)
+    if value < 10.0:
+        return 4
+    if value < 16.0:
+        return 3
+    if value < 22.0:
         return 2
-    return 3
+    return 1
 
 
 def normalize(value, total):
     res = value / total
+    if res > 0.5:
+        return 3.0
     return res * 3.0
 
 
@@ -33,7 +36,6 @@ def depression_calculator(emotions):
 
     coeffs = [s, f, f_su, c, ac, afc, fs, sc, sfc]
     return depression(sum(coeffs))
-
 
 # emotions = {
 #     "anger": 0,
