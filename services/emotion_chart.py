@@ -12,7 +12,7 @@ def emotions_chart(dateFrom, dateTo):
     fig = plt.figure('EMOTIONS CHART')
 
     x = [datetime.strptime(d, '%Y-%m-%d').date() for d in x]
-    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%m/%d/%Y'))
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
     plt.gca().xaxis.set_major_locator(mdates.DayLocator())
 
     plt.stackplot(x, y3, y2, y1, labels=['Sadness', 'Neutral', 'Happiness'])

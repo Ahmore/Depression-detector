@@ -13,7 +13,7 @@ def happiness_chart(dateFrom, dateTo):
     fig = plt.figure('HAPPINESS CHART')
 
     x = [datetime.strptime(d, '%Y-%m-%d').date() for d in x]
-    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%m/%d/%Y'))
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
     plt.gca().xaxis.set_major_locator(mdates.DayLocator())
     plt.yticks([1.0, 2.0, 3.0, 4.0],
                ['Deep depression', 'Strong depression', 'Mild depression',
