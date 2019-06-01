@@ -66,4 +66,3 @@ def get_raw_data():
                                    'fear': 0.3, 'happiness': 0.5,
                                    'neutral': 0.0,
                                    'sadness': 0.2, 'surprise': 0.0}}}]
-

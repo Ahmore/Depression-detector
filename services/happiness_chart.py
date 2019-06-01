@@ -4,7 +4,6 @@ from services.deprcalc import depression_calculator
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from datetime import datetime
-from services.test_data import get_raw_data
 
 
 def happiness_chart(dateFrom, dateTo):

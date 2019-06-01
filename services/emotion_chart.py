@@ -1,6 +1,5 @@
 from services.api import get_measurements
 import gui.start
-from services.deprcalc import depression_calculator
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from datetime import datetime
