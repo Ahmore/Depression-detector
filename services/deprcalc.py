@@ -34,7 +34,6 @@ def depression_calculator(emotions):
     fs = normalize(emotions["fear"] + emotions["sadness"], total)
     sc = normalize(emotions["sadness"] + emotions["contempt"], total)
     sfc = normalize(
-
         emotions["sadness"] + emotions["fear"] + emotions["contempt"], total)
 
     coeffs = [s, fn, f_su, c, acs, afc, fs, sc, sfc]
