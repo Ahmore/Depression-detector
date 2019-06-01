@@ -26,6 +26,12 @@ def happiness_chart(dateFrom, dateTo):
     plt.show()
 
 
+def weighted_photos(photos):
+    hidden = depression_calculator(photos['hidden_photo'])
+    unhidden = depression_calculator(photos['unhidden_photo'])
+    return round((hidden * 3 + unhidden) / 4.0)
+
+
 def get_chart_data(dateFrom, dateTo):
     raw_data = get_measurements(gui.login.token)
     data = [elem for elem in raw_data if
@@ -34,6 +40,6 @@ def get_chart_data(dateFrom, dateTo):
 
     date = [elem['date'] for elem in sorted_data]
     self_assesment = [elem['value']['feeling'] for elem in sorted_data]
-    calculated = [depression_calculator(elem['value']['hidden_photo']) for elem
+    calculated = [weighted_photos(elem['value']) for elem
                   in sorted_data]
     return date, self_assesment, calculated
