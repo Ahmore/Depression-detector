@@ -28,7 +28,8 @@ def happiness_chart(dateFrom, dateTo):
 
 def weighted_photos(photos):
     hidden = depression_calculator(photos['hidden_photo'])
-    unhidden = depression_calculator(photos['unhidden_photo'])
+    unhidden = depression_calculator(
+        photos['unhidden_photo']) if 'unhidden_photo' in photos else 2
     return round((hidden * 3 + unhidden) / 4.0)
 
 
@@ -39,6 +40,7 @@ def get_chart_data(dateFrom, dateTo):
 
     date_feeling_map = {}
     for elem in data:
+
         if elem['date'] in date_feeling_map:
             existing = date_feeling_map[elem['date']]['value']['hidden_photo']
             existing['sadness'] += elem['value']['hidden_photo']['sadness']
@@ -48,6 +50,12 @@ def get_chart_data(dateFrom, dateTo):
             existing['contempt'] += elem['value']['hidden_photo']['contempt']
             existing['disgust'] += elem['value']['hidden_photo']['disgust']
             existing['surprise'] += elem['value']['hidden_photo']['surprise']
+            if 'feeling' in elem['value']:
+                date_feeling_map[elem['date']]['value']['feeling'] = \
+                    elem['value']['feeling']
+            if 'unhidden_photo' in elem['value']:
+                date_feeling_map[elem['date']]['value']['unhidden_photo'] = \
+                    elem['value']['unhidden_photo']
         else:
             date_feeling_map[elem['date']] = elem
 
@@ -56,7 +64,9 @@ def get_chart_data(dateFrom, dateTo):
     sorted_data = sorted(data, key=lambda item: item['date'])
 
     date = [elem['date'] for elem in sorted_data]
-    self_assesment = [elem['value']['feeling'] for elem in sorted_data]
+    self_assesment = [
+        (elem['value']['feeling'] if ('feeling' in elem['value']) else 2) for elem
+        in sorted_data]
     calculated = [weighted_photos(elem['value']) for elem
                   in sorted_data]
     return date, self_assesment, calculated
