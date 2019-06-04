@@ -38,6 +38,19 @@ def get_chart_data(dateFrom, dateTo):
     raw_data = get_measurements(gui.login.token)
     data = [elem for elem in raw_data if
             elem['date'] >= dateFrom and elem['date'] <= dateTo]
+
+    date_feeling_map = {}
+    for elem in data:
+        if elem['date'] in date_feeling_map:
+            existing = date_feeling_map[elem['date']]['value']['hidden_photo']
+            existing['sadness'] += elem['value']['hidden_photo']['sadness']
+            existing['neutral'] += elem['value']['hidden_photo']['neutral']
+            existing['happiness'] += elem['value']['hidden_photo']['happiness']
+        else:
+            date_feeling_map[elem['date']] = elem
+
+    data = [elem for elem in date_feeling_map.values()]
+    print(data)
     sorted_data = sorted(data, key=lambda item: item['date'])
 
     date = [elem['date'] for elem in sorted_data]
