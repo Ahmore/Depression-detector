@@ -1,6 +1,7 @@
 from tkinter import *
 from gui.overview import open_overview_screen
 from services.api import login
+from services.interval_job import start_interval_job
 import gui.start
 
 def open_login_screen():
@@ -40,6 +41,7 @@ def try_login(username, password):
 
     if token is not None:
         go_to_overview_screen()
+        start_interval_job()
     else:
         open_login_result_screen()
 
