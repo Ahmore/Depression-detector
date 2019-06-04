@@ -2,3 +2,4 @@ numpy==1.15.3
 opencv-python==4.1.0.25
 requests
 tkcalendar
+apscheduler

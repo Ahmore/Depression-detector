@@ -66,7 +66,11 @@ def get_azure_data(azure_token, image):
     }
 
     response = requests.post(face_api_url, params=params, headers=headers, data=image)
-    return response.json()[0].get('faceAttributes').get('emotion')
+
+    if len(response.json()) == 0:
+        return None
+    else:
+        return response.json()[0].get('faceAttributes').get('emotion')
 
 
 def send_measurement(token, date, value):
